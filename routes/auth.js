@@ -153,29 +153,53 @@ router.get('/dashboard', (req, res) => {
 
 router.get('/buyer-profile', (req, res) => {
     console.log(req.session.user_id + "cart data will work");
-    let query = `SELECT cart_id, quantity, product_name, product_id, buyer_id, product_price FROM carts WHERE user_id= '${req.session.user_id}'`;
-     
-    connection.query(query, (error, results) => {
-      if (error) {
-        console.error(error);
-        
-      } else {
-        const cart_id = results[0].cart_id;
-        req.session.cart_id = cart_id;
 
-        console.log( "this is the cart ID "+ req.session.cart_id);
-       
-        console.log(results);
+    // Query to count the number of rows in the carts table
+    const countQuery = "SELECT COUNT(*) as count FROM carts";
 
-        const totalPrice = results.reduce((total, item) => total + item.product_price, 0);
-        console.log("Grand Total: ", totalPrice);
-
-        res.render('buyer-profile',{nameofUser: req.session.first_name, details: results, grandtotal: totalPrice});
-       
+    connection.query(countQuery, (error, countResult) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).send('Error checking cart data');
         }
-      
+
+        const cartCount = countResult[0].count;
+
+        if (cartCount == 0) {
+            console.log('Cart table is empty');
+            return res.render('buyer-profile', { nameofUser: req.session.first_name, details: [], grandtotal: "" });
+        }
+
+        // Query to fetch cart data for the logged-in user
+        const query = `SELECT cart_id, quantity, product_name, product_id, buyer_id, product_price FROM carts WHERE user_id= '${req.session.user_id}'`;
+
+        connection.query(query, (error, results) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).send('Error fetching cart data');
+            }
+
+            const cart_id = results[0].cart_id;
+            req.session.cart_id = cart_id;
+
+            console.log("this is the cart ID " + req.session.cart_id);
+
+            if (cart_id < 1 || cart_id == "") {
+                console.log('Cart is empty');
+                return res.render('buyer-profile', { nameofUser: req.session.first_name, details: [], grandtotal: "" });
+            } else {
+                console.log("this is the cart ID " + req.session.cart_id);
+                console.log("QWERTYUI123" + results);
+
+                const totalPrice = results.reduce((total, item) => total + item.product_price, 0);
+                console.log("Grand Total: ", totalPrice);
+
+                return res.render('buyer-profile', { nameofUser: req.session.first_name, details: results, grandtotal: totalPrice });
+            }
+        });
     });
 });
+
 
 router.get('/editcart', (req, res) =>{
 
