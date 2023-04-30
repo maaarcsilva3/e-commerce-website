@@ -38,20 +38,8 @@ connection.connect((error) => {
     console.log('Connected to MySQL database sample_schema ');
 });
 
-
-
-//express-session
-
-
-router.get('/test', function (req, res, next) {
-    req.session.myVar = 'Hello, world!';
-    res.send('Session set!');
-});
   
-router.get('/check', (req, res) => {
-const myVar = req.session.myVar || 'Session not set!';
-res.send(myVar);
-});
+
 
 
 
@@ -193,19 +181,21 @@ router.get('/buyer-profile', (req, res) => {
             }
 
             const cart_id = results[0].cart_id;
+            const prodname= results[0].product_name;
             req.session.cart_id = cart_id;
+            req.session.product_name =prodname;
 
-            console.log("this is the cart ID " + req.session.cart_id);
+           
 
             if (cart_id < 1 || cart_id == "") {
                 console.log('Cart is empty');
                 return res.render('buyer-profile', { nameofUser: req.session.first_name, details: [], grandtotal: "" });
             } else {
-                console.log("this is the cart ID " + req.session.cart_id);
-                console.log("QWERTYUI123" + results);
+               
+                
 
                 const totalPrice = results.reduce((total, item) => total + item.product_price, 0);
-                console.log("Grand Total: ", totalPrice);
+                
 
                 return res.render('buyer-profile', { nameofUser: req.session.first_name, details: results, grandtotal: totalPrice });
             }
@@ -298,7 +288,7 @@ router.post('/addtoCart', urlencodedParser, (req, res) => {
     const productName = req.body.product_name;
     const productPrice = req.body.product_price;
     const productQty = req.body.product_qty;
-    console.log(productName,productPrice,productQty);
+    
 
 
     let sql = `INSERT INTO carts SET ?`;
@@ -317,27 +307,94 @@ router.post('/addtoCart', urlencodedParser, (req, res) => {
 });
 
 
-router.get('/cartdata', (req, res) => {
-    console.log(req.session.user_id + "cart data will work");
-    let query = `SELECT cart_id, quantity, product_name, product_id, buyer_id, product_price FROM carts WHERE user_id= '${req.session.user_id}'`;
-     
+router.post('/testing', urlencodedParser, (req, res) => {
+    let query = 'SELECT product_name FROM carts';
+
+    let query2 = `DELETE FROM carts WHERE user_id = '${req.session.user_id}'`;
+
     connection.query(query, (error, results) => {
-      if (error) {
-        console.error(error);
-        
-      } else {
+        if (error) {
+            console.error(error);
+            return res.status(500).send('Error ');
 
-        console.log(results);
-        
-        const totalPrice = results.reduce((total, item) => total + item.product_price, 0);
-        console.log("Grand Total: ", totalPrice);
-
-        res.render('buyer-profile',{details: results, grandtotal: totalPrice});
-       
         }
-      
-    });
+        results.forEach((result) => {
+            const productName = result.product_name;
+            console.log(productName);
+
+            const query2 = `UPDATE products SET product_qty = product_qty - 1 WHERE product_name = '${productName}'`;
+
+            connection.query(query2, (error, result, fields) => {
+                if (error) {
+                    console.error(error);
+                    } else {
+                    console.log(result);
+                }
+                
+            });
+        
+        });
+
+        connection.query(query2, (error, results) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).send('Error ');
+            }
+
+            res.redirect('dashboard');
+        }); 
+
+       
+    }); 
+   
 });
+
+
+router.post('/checkout', urlencodedParser, (req, res) => {
+
+    let query = 'SELECT product_name FROM carts';
+
+    let query2 = `DELETE FROM carts WHERE user_id = '${req.session.user_id}'`;
+
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).send('Error ');
+
+        }
+        results.forEach((result) => {
+            const productName = result.product_name;
+            console.log(productName);
+
+            const query2 = `UPDATE products SET product_qty = product_qty - 1 WHERE product_name = '${productName}'`;
+
+            connection.query(query2, (error, result, fields) => {
+                if (error) {
+                    console.error(error);
+                    } else {
+                    console.log(result);
+                }
+                
+            });
+        
+        });
+
+        connection.query(query2, (error, results) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).send('Error ');
+            }
+
+            res.redirect('dashboard');
+        }); 
+
+       
+    }); 
+
+   
+});
+
+
 
 
 //sellers functions
