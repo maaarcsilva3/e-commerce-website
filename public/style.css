@@ -1,5 +1,17 @@
 #abc {
   color: red ;
-;
+}
 
+#uploadform-container{
+text-align: center;
+width: 25%;
+margin:auto;
+}
+
+#sellitem-button {
+  margin-top: 20px;
+}
+
+#listed_item{
+  width: 25%;
 }

@@ -34,7 +34,7 @@ connection.connect((error) => {
         return;
     }
 
-    console.log('Connected to MySQL database sample_schema '+ connection.threadId);
+    console.log('Connected to MySQL database sample_schema ');
 });
 
 
@@ -51,9 +51,6 @@ router.get('/check', (req, res) => {
 const myVar = req.session.myVar || 'Session not set!';
 res.send(myVar);
 });
-
-
-
 
 
 
@@ -148,6 +145,7 @@ router.post('/signup', urlencodedParser, (req, res) => {
 router.get('/dashboard', (req, res) => {
     res.render ('dashboard', {nameofUser: req.session.first_name});
 });
+
 
 
 
@@ -256,9 +254,8 @@ router.post('/authenticate', urlencodedParser, (req, res) => {
         req.session.last_name =last_name;
         req.session.user_id =user_id;
 
+        console.log(req.session.user_type,req.session.first_name,req.session.last_name, req.session.user_id);
        
-        
-        
         const hashedPassword = results[0].password;
         bcrypt.compare(password, hashedPassword).then((match) => {
           if (match) {
@@ -267,7 +264,7 @@ router.post('/authenticate', urlencodedParser, (req, res) => {
             if(user_type == "buyer"){
                 res.redirect('/dashboard');
             }else{
-                res.redirect('/dashboard');
+                res.redirect('/seller-dashboard');
             }
             
           } else {
@@ -278,10 +275,6 @@ router.post('/authenticate', urlencodedParser, (req, res) => {
       }
     });
 });
-
-
-
-
 
 
 
@@ -503,6 +496,69 @@ router.get('/cartdata', (req, res) => {
         }
       
     });
+});
+
+
+//sellers functions
+router.get('/seller-dashboard', (req, res) => {
+    let query =`SELECT product_name, product_price, product_qty FROM products WHERE user_id = '${req.session.user_id}'`;
+    connection.query(query, (error, results) => {
+        if (error) {
+          console.error(error);
+          
+        } else {
+            const product_name=results[0].product_name;
+            const product_price = results[0].product_price;
+            const product_qty = results[0].product_qty;
+  
+          console.log(results);
+          res.render ('seller-dashboard', {nameofUser: req.session.first_name, nameofArt:req.session.product_name, data: results});
+        //   res.render('productlist', {data: results});
+        }
+      });
+    // res.render ('seller-dashboard', {nameofUser: req.session.first_name, nameofArt:req.session.product_name});
+});
+
+router.post('/sellitem', urlencodedParser, (req, res) => {
+    let product_name = req.body.p_name;
+    let product_price = req.body.p_price;
+    let product_quantity = req.body.p_qty;
+    let product_link = req.body.p_link;
+    let user_id = req.session.user_id;
+
+    req.session.product_name = product_name;
+    req.session.product_price = product_price;
+    req.session.product_quantity = product_quantity;
+    req.session.p_link = product_link;
+
+    console.log("seller details from this session: " + req.session.product_name, req.session.product_price, req.session.product_quantity);
+  
+
+    let prod_details = {'product_link':product_link, 'product_name':product_name, 'product_price': product_price, 'product_qty': product_quantity, 'user_id': user_id};
+    let sql = `INSERT INTO products SET ?`;
+
+    connection.query(sql, prod_details, (error, result)=>{
+        if (error) {
+            throw error;
+        } else {
+
+            console.log("successfuly stored to DB")
+            res.redirect('seller-dashboard');
+        }
+
+
+        
+    });
+});
+
+
+
+
+router.post('/editlisting', urlencodedParser, (req, res) => {
+
+
+
+
 });
 
 

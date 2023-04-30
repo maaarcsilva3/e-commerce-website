@@ -1,0 +1,26 @@
+<div id="uploadform-container">
+ THIS IS YOUR LISTINGSzz
+
+ <% data.forEach((item) => { %>
+    <div class="group relative">
+        <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+            <img src="-----" alt="art 2" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+        </div>
+        <div class="mt-4 flex justify-between">
+            <div>
+            <h3 class="text-sm text-gray-700">
+                <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+                <%- item.product_name %>
+                </a>
+            </h3>
+            </div>
+            <p class="text-sm font-medium text-gray-900">qty: <%- item.product_qty %> </p>
+            <p class="text-sm font-medium text-gray-900">price <%- item.product_price %></p>
+            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
+        </div>
+    </div>
+    <% }); %>
+
+
+  </div>
