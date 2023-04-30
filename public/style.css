@@ -16,3 +16,13 @@ margin:auto;
 #listed_item{
   width: 25%;
 }
+
+#listingcontainer{
+  display: flex;
+  width: auto;
+  
+}
+
+#azx{
+  height: 2000px !important;
+}

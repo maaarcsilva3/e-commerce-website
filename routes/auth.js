@@ -143,8 +143,22 @@ router.post('/signup', urlencodedParser, (req, res) => {
    
 });
 
+
 router.get('/dashboard', (req, res) => {
-    res.render ('dashboard', {nameofUser: req.session.first_name});
+    let query = 'SELECT product_name, product_price,product_qty FROM products';
+
+    connection.query(query, (error, results) => {
+        if (error) {
+          console.error(error);
+          
+        } else {
+            console.log(results);
+            res.render ('dashboard', {nameofUser: req.session.first_name, newTarget: results});
+        }
+        
+      });
+   
+
 });
 
 
@@ -170,7 +184,7 @@ router.get('/buyer-profile', (req, res) => {
         }
 
         // Query to fetch cart data for the logged-in user
-        const query = `SELECT cart_id, quantity, product_name, product_id, buyer_id, product_price FROM carts WHERE user_id= '${req.session.user_id}'`;
+        const query = `SELECT cart_id, quantity, product_name, user_id, product_price FROM carts WHERE user_id= '${req.session.user_id}'`;
 
         connection.query(query, (error, results) => {
             if (error) {
@@ -280,200 +294,26 @@ router.post('/authenticate', urlencodedParser, (req, res) => {
 
 
 router.post('/addtoCart', urlencodedParser, (req, res) => {
-    console.log(req.session.user_type);
-    console.log("add to cart post is working");
-    let qty=1;
-    let selectedId=req.body.id;
-  
-
-    if (selectedId === 'boat-painting') {
-    //    let product_name = 'Boat Painting';
-
-       connection.query('SELECT product_id, product_price, product_name From products WHERE  product_id = 1; ', (err, result) => {
-            if (err) throw err;
-
-            const product_id = result[0].product_id;
-            const product_price = result[0].product_price;
-            const product_name = result[0].product_name;
-
-            req.session.product_id = product_id;
-            req.session.product_price = product_price;
-            req.session.product_name = product_name;
-
-            console.log(req.session.product_id);
-            console.log(req.session.product_price);
-            console.log(req.session.product_name);
-            console.log(req.session.user_type);
-        });
+    //to get the value from ejs template tag
+    const productName = req.body.product_name;
+    const productPrice = req.body.product_price;
+    const productQty = req.body.product_qty;
+    console.log(productName,productPrice,productQty);
 
 
-        if(req.session.user_type == "buyer") {
-
-            var newQuery= `SELECT buyer_id From buyers WHERE  first_name = '${req.session.first_name}'`;
-
-            connection.query( newQuery, (err, result) => {
-                if (err) throw err;
+    let sql = `INSERT INTO carts SET ?`;
+    let cartDetail = {'product_name':productName, 'product_price':productPrice, 'quantity': productQty, 'user_id':req.session.user_id, };
     
-                const buyer_id = result[0].buyer_id;
-                req.session.buyer_id = buyer_id;
 
-                console.log(req.session.buyer_id);
-
-                let addtoCart = {'quantity':qty, 'product_name': req.session.product_name, 'product_id': req.session.product_id, 'buyer_id':req.session.buyer_id, 'product_price': req.session.product_price, 'user_id':req.session.user_id};
-                let sql = `INSERT INTO carts SET ?`;
-        
-                connection.query(sql, addtoCart, (err, result)=>{
-                    if(err) throw err;
-                    console.log("added to cart");
-                    
-                });
-
-            });
-
-        } 
+    connection.query(sql, cartDetail, (err, result)=>{
+        if(err) throw err;
+        res.redirect('/dashboard');
+    });
 
 
-  
 
-    } 
-
-
-    else if (selectedId === 'river-painting') {
-        let product_name = 'River Painting';
-        connection.query('SELECT product_id, product_price, product_name From products WHERE  product_id = 2; ', (err, result) => {
-            if (err) throw err;
-
-            const product_id = result[0].product_id;
-            const product_price = result[0].product_price;
-            const product_name = result[0].product_name;
-
-            req.session.product_id = product_id;
-            req.session.product_price = product_price;
-            req.session.product_name = product_name;
-
-            console.log(req.session.product_id);
-            console.log(req.session.product_price);
-            console.log(req.session.product_name);
-            console.log(req.session.user_type);
-        });
-
-
-        if(req.session.user_type == "buyer") {
-
-            var newQuery= `SELECT buyer_id From buyers WHERE  first_name = '${req.session.first_name}'`;
-
-            connection.query( newQuery, (err, result) => {
-                if (err) throw err;
+   
     
-                const buyer_id = result[0].buyer_id;
-                req.session.buyer_id = buyer_id;
-
-                console.log(req.session.buyer_id);
-
-                let addtoCart = {'quantity':qty, 'product_name': req.session.product_name, 'product_id': req.session.product_id, 'buyer_id':req.session.buyer_id, 'product_price': req.session.product_price, 'user_id':req.session.user_id};
-                let sql = `INSERT INTO carts SET ?`;
-        
-                connection.query(sql, addtoCart, (err, result)=>{
-                    if(err) throw err;
-                    console.log("added to cart");
-                });
-
-            });
-
-        } 
-    } 
-    
-    else if (selectedId === 'bird-painting') {
-        connection.query('SELECT product_id, product_price, product_name From products WHERE  product_id = 3; ', (err, result) => {
-            if (err) throw err;
-
-            const product_id = result[0].product_id;
-            const product_price = result[0].product_price;
-            const product_name = result[0].product_name;
-
-            req.session.product_id = product_id;
-            req.session.product_price = product_price;
-            req.session.product_name = product_name;
-
-            console.log(req.session.product_id);
-            console.log(req.session.product_price);
-            console.log(req.session.product_name);
-            console.log(req.session.user_type);
-        });
-
-
-        if(req.session.user_type == "buyer") {
-
-            var newQuery= `SELECT buyer_id From buyers WHERE  first_name = '${req.session.first_name}'`;
-
-            connection.query( newQuery, (err, result) => {
-                if (err) throw err;
-    
-                const buyer_id = result[0].buyer_id;
-                req.session.buyer_id = buyer_id;
-
-                console.log(req.session.buyer_id);
-
-                let addtoCart = {'quantity':qty, 'product_name': req.session.product_name, 'product_id': req.session.product_id, 'buyer_id':req.session.buyer_id, 'product_price': req.session.product_price, 'user_id':req.session.user_id};
-                let sql = `INSERT INTO carts SET ?`;
-        
-                connection.query(sql, addtoCart, (err, result)=>{
-                    if(err) throw err;
-                    console.log("added to cart");
-                });
-
-            });
-
-        } 
-    }
-    
-    else if (selectedId === 'tree-painting') {
-        connection.query('SELECT product_id, product_price, product_name From products WHERE  product_id = 4; ', (err, result) => {
-            if (err) throw err;
-
-            const product_id = result[0].product_id;
-            const product_price = result[0].product_price;
-            const product_name = result[0].product_name;
-
-            req.session.product_id = product_id;
-            req.session.product_price = product_price;
-            req.session.product_name = product_name;
-
-            console.log(req.session.product_id);
-            console.log(req.session.product_price);
-            console.log(req.session.product_name);
-            console.log(req.session.user_type);
-        });
-
-
-        if(req.session.user_type == "buyer") {
-
-            var newQuery= `SELECT buyer_id From buyers WHERE  first_name = '${req.session.first_name}'`;
-
-            connection.query( newQuery, (err, result) => {
-                if (err) throw err;
-    
-                const buyer_id = result[0].buyer_id;
-                req.session.buyer_id = buyer_id;
-
-                console.log(req.session.buyer_id);
-
-                let addtoCart = {'quantity':qty, 'product_name': req.session.product_name, 'product_id': req.session.product_id, 'buyer_id':req.session.buyer_id, 'product_price': req.session.product_price, 'user_id':req.session.user_id};
-                let sql = `INSERT INTO carts SET ?`;
-        
-                connection.query(sql, addtoCart, (err, result)=>{
-                    if(err) throw err;
-                    console.log("added to cart");
-                });
-
-            });
-
-        } 
-        
-    }
-    
- 
-    res.redirect('/dashboard');
 });
 
 
@@ -558,15 +398,13 @@ router.post('/sellitem', urlencodedParser, (req, res) => {
     });
 });
 
-
-
-
 router.post('/editlisting', urlencodedParser, (req, res) => {
 
 
 
 
 });
+
 
 
 

@@ -41,136 +41,52 @@
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <h2 class="text-2xl font-bold tracking-tight text-gray-900">Products</h2>
   
-        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      <% newTarget.forEach((item) => { %>
+        <div id="listingcontainer" class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
 
             <form  action="/addtoCart" method="POST">
-                <input type="hidden" name="id" value="boat-painting">
+                <input type="hidden" name="product_name" value="<%- item.product_name %>">
+                <input type="hidden" name="product_price" value="<%- item.product_price %>">
+                <input type="hidden" name="product_qty" value="<%- item.product_qty %>">
+               
                 <div class="group relative">
                     <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                        <img style="z-index: 5;" src="https://rb.gy/yy58k" alt="art 1" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                        <img style="z-index: 5;" src="#" alt="art 1" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-sm text-gray-700">
                                 <a href="#">
                                 <span aria-hidden="true" class="absolute inset-0"></span>
-                                <h3 > Boat Painting </h3>
+                                <h3 > Painting Name <%- item.product_name %></h3>
                                 </a>
                             </h3>
 
                         </div>
-
-                        <p class="text-sm font-medium text-gray-900">$35</p>
+                        <div>
+                        <p class="text-sm font-medium text-gray-900">Price: <%- item.product_price %></p>
+                        </div>
+                        <div>
+                        <p class="text-sm font-medium text-gray-900">Qty    <%- item.product_qty %></p>
+                        </div>
                         <div style="z-index: 999;">
                             
                             <button  type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg aria-hidden="true" class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>
                                 Add to Cart
                             </button>
-
+                          
                            
                             
                         </div>
                     </div>
                 </div>
+                
             </form>
-
-
-            <form  action="/addtoCart" method="POST">
-                <input type="hidden" name="id" value="river-painting">
-                <div class="group relative">
-                    <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                        <img src="https://rb.gy/rtlgs" alt="art 2" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                        <div>
-                            <h3 class="text-sm text-gray-700">
-                                <a href="#">
-                                <span aria-hidden="true" class="absolute inset-0"></span>
-                                <h3 id="river-painting"> River Painting </h3>
-                                </a>
-                            </h3>
-                        </div>
-                        <p class="text-sm font-medium text-gray-900">$35</p>
-
-                        <div style="z-index: 999;">
-                        
-                            <button  type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                <svg aria-hidden="true" class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>
-                                Add to Cart
-                            </button>
-    
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-
-
-
-
-            <form  action="/addtoCart" method="POST">
-                <input type="hidden" name="id" value="bird-painting">
-                <div class="group relative">
-                    <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                        <img src="https://rb.gy/m7ga0" alt="art 3" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                        <div>
-                        <h3 class="text-sm text-gray-700">
-                            <a href="#">
-                            <span aria-hidden="true" class="absolute inset-0"></span>
-                            <h3 id="bird-painting"> Bird Painting </h3>
-                            </a>
-                        </h3>
-                        </div>
-                        <p class="text-sm font-medium text-gray-900">$35</p>
-                        <div style="z-index: 999;">
-                            
-                            <button  type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                <svg aria-hidden="true" class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>
-                                Add to Cart
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-
-
-
-            <form  action="/addtoCart" method="POST">
-                <input type="hidden" name="id" value="tree-painting">
-                <div class="group relative">
-                    <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                        <img src="https://rb.gy/aqayn" alt="art 4" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                        <div>
-                        <h3 class="text-sm text-gray-700">
-                            <a href="#">
-                            <span aria-hidden="true" class="absolute inset-0"></span>
-                            <h3 id="tree-painting">Tree Painting </h3>
-                            </a>
-                        </h3>
-                        </div>
-                        <p class="text-sm font-medium text-gray-900">$35</p>
-                        <div style="z-index: 999;">
-                            
-                            <button  type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                <svg aria-hidden="true" class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>
-                                Add to Cart
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </form>
-
 
         </div>
+        <% }); %>
 
 
 
