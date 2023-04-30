@@ -25,7 +25,8 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'Incorrect123!',
-  database : 'sample_schema'
+  database : 'sample_schema',
+  multipleStatements: true
 });
 
 connection.connect((error) => {
@@ -501,22 +502,28 @@ router.get('/cartdata', (req, res) => {
 
 //sellers functions
 router.get('/seller-dashboard', (req, res) => {
-    let query =`SELECT product_name, product_price, product_qty FROM products WHERE user_id = '${req.session.user_id}'`;
+
+    let query = `SELECT product_name, product_price, product_qty FROM products WHERE user_id = '${req.session.user_id}'; SELECT count(*) as count FROM products WHERE user_id= '${req.session.user_id}'`;
+
     connection.query(query, (error, results) => {
         if (error) {
-          console.error(error);
-          
+        console.error(error);
+        
         } else {
-            const product_name=results[0].product_name;
-            const product_price = results[0].product_price;
-            const product_qty = results[0].product_qty;
-  
-          console.log(results);
-          res.render ('seller-dashboard', {nameofUser: req.session.first_name, nameofArt:req.session.product_name, data: results});
-        //   res.render('productlist', {data: results});
+        let productsCount = results[1][0].count;
+         
+        console.log(productsCount);
+        console.log(results);
+        res.render ('seller-dashboard', {nameofUser: req.session.first_name, nameofArt:req.session.product_name, data: results[0],});
+    
         }
-      });
-    // res.render ('seller-dashboard', {nameofUser: req.session.first_name, nameofArt:req.session.product_name});
+
+    });
+
+
+
+
+    
 });
 
 router.post('/sellitem', urlencodedParser, (req, res) => {

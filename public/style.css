@@ -3,6 +3,7 @@
 }
 
 #uploadform-container{
+  display: auto;
 text-align: center;
 width: 25%;
 margin:auto;
