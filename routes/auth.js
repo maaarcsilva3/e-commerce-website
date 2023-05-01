@@ -140,6 +140,9 @@ router.get('/dashboard', (req, res) => {
           console.error(error);
           
         } else {
+           
+
+
             console.log(results);
             res.render ('dashboard', {nameofUser: req.session.first_name, newTarget: results});
         }
@@ -148,6 +151,14 @@ router.get('/dashboard', (req, res) => {
    
 
 });
+
+
+
+
+
+
+
+
 
 
 
@@ -311,44 +322,32 @@ router.post('/addtoCart', urlencodedParser, (req, res) => {
 
 
 router.post('/testing', urlencodedParser, (req, res) => {
-    let query = 'SELECT product_name FROM carts';
+    let query = 'SELECT product_link, product_name, product_price, product_qty FROM products'; 
+    let deleteQuery = 'DELETE FROM products WHERE product_qty = 0';
 
-    let query2 = `DELETE FROM carts WHERE user_id = '${req.session.user_id}'`;
-
-    connection.query(query, (error, results) => {
+    connection.query(deleteQuery, (error, result) => {
         if (error) {
-            console.error(error);
-            return res.status(500).send('Error ');
-
-        }
-        results.forEach((result) => {
-            const productName = result.product_name;
-            console.log(productName);
-
-            const query2 = `UPDATE products SET product_qty = product_qty - 1 WHERE product_name = '${productName}'`;
-
-            connection.query(query2, (error, result, fields) => {
+          console.error(error);
+          
+        } else {
+            
+            connection.query(query, (error, results) => {
                 if (error) {
-                    console.error(error);
-                    } else {
-                    console.log(result);
+                  console.error(error);
+                  
+                } else {
+                    
+        
+        
+                    console.log(results);
+                    res.render ('dashboard', {nameofUser: req.session.first_name, newTarget: results});
                 }
                 
             });
-        
-        });
 
-        connection.query(query2, (error, results) => {
-            if (error) {
-                console.error(error);
-                return res.status(500).send('Error ');
-            }
+        }
+    });
 
-            res.redirect('dashboard');
-        }); 
-
-       
-    }); 
    
 });
 
@@ -388,14 +387,36 @@ router.post('/checkout', urlencodedParser, (req, res) => {
                 return res.status(500).send('Error ');
             }
 
-            res.redirect('dashboard');
+            ///////////////////////////////////////////////////////////
+            let deleteQuery = 'DELETE FROM products WHERE product_qty <= 0';
+
+                connection.query(deleteQuery, (error, result) => {
+                    if (error) {
+                    console.error(error);
+                    
+                    } else {
+                        res.redirect('dashboard');
+                        
+
+                    }
+                });
+
+
+
+            /////////////////////////
+
+
+          
         }); 
 
        
     }); 
+    
 
    
 });
+
+
 
 router.get('/logout', (req, res)=>{
   
@@ -414,6 +435,8 @@ router.get('/seller-dashboard', (req, res) => {
         
         } else {
         let productsCount = results[1][0].count;
+
+        console.log(productsCount);
          
         res.render ('seller-dashboard', {nameofUser: req.session.first_name, nameofArt:req.session.product_name, data: results[0],});
     
@@ -422,10 +445,12 @@ router.get('/seller-dashboard', (req, res) => {
     });
 
 
-
-
     
 });
+
+
+
+
 
 router.post('/sellitem', urlencodedParser, (req, res) => {
     let product_name = req.body.p_name;
