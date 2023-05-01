@@ -37,6 +37,9 @@
           <li>
           <a href=" # " class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Browse</a>
           </li>
+          <li>
+            <a href="/logout" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
+          </li>
         
         </ul>
 
@@ -81,7 +84,7 @@
     <% data.forEach((item) => { %>
        <div class="group relative">
            <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-               <img src="-----" alt="art 2" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+               <img src="<%- item.product_link %>" alt="art 2" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
            </div>
            <div class="mt-4 flex justify-between">
                <div>
@@ -94,9 +97,13 @@
                </div>
                <p class="text-sm font-medium text-gray-900">qty: <%- item.product_qty %> </p>
                <p class="text-sm font-medium text-gray-900">price <%- item.product_price %></p>
-               <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
-           </div>
+               
+              </div>
+
        </div>
+       <form  action="/remove-listing" method="POST">
+        <button style="z-index: 999;" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove Listing</button>
+      </form>
        <% }); %>
    
    

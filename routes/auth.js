@@ -133,7 +133,7 @@ router.post('/signup', urlencodedParser, (req, res) => {
 
 
 router.get('/dashboard', (req, res) => {
-    let query = 'SELECT product_name, product_price,product_qty FROM products';
+    let query = 'SELECT product_link, product_name, product_price,product_qty FROM products';
 
     connection.query(query, (error, results) => {
         if (error) {
@@ -354,7 +354,7 @@ router.post('/checkout', urlencodedParser, (req, res) => {
 
     let query = 'SELECT product_name FROM carts';
 
-    let query2 = `DELETE FROM carts WHERE user_id = '${req.session.user_id}'`;
+    let newQuery = `DELETE FROM carts WHERE user_id = '${req.session.user_id}'`;
 
     connection.query(query, (error, results) => {
         if (error) {
@@ -379,7 +379,7 @@ router.post('/checkout', urlencodedParser, (req, res) => {
         
         });
 
-        connection.query(query2, (error, results) => {
+        connection.query(newQuery, (error, results) => {
             if (error) {
                 console.error(error);
                 return res.status(500).send('Error ');
@@ -394,13 +394,16 @@ router.post('/checkout', urlencodedParser, (req, res) => {
    
 });
 
-
+router.get('/logout', (req, res)=>{
+  
+    res.redirect('login');
+});
 
 
 //sellers functions
 router.get('/seller-dashboard', (req, res) => {
 
-    let query = `SELECT product_name, product_price, product_qty FROM products WHERE user_id = '${req.session.user_id}'; SELECT count(*) as count FROM products WHERE user_id= '${req.session.user_id}'`;
+    let query = `SELECT product_link, product_name, product_price, product_qty FROM products WHERE user_id = '${req.session.user_id}'; SELECT count(*) as count FROM products WHERE user_id= '${req.session.user_id}'`;
 
     connection.query(query, (error, results) => {
         if (error) {
@@ -455,8 +458,36 @@ router.post('/sellitem', urlencodedParser, (req, res) => {
     });
 });
 
-router.post('/editlisting', urlencodedParser, (req, res) => {
 
+router.post('/remove-listing', urlencodedParser, (req, res) => {
+    let query = 'SELECT product_name FROM products'; 
+
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).send('Error ');
+        }
+
+        results.forEach((result) => {
+            const productName = result.product_name;
+            console.log(productName);
+
+            const query2 = `DELETE FROM products WHERE product_name = '${productName}'`;
+
+            connection.query(query2, (error, result, fields) => {
+                if (error) {
+                    console.error(error);
+                    } else {
+                    console.log(result);
+                }
+                
+                res.redirect('seller-dashboard');
+            });
+            
+           
+        });
+        
+    }); 
 
 
 
