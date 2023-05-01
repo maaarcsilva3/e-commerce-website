@@ -284,6 +284,7 @@ router.post('/authenticate', urlencodedParser, (req, res) => {
 
 
 router.post('/addtoCart', urlencodedParser, (req, res) => {
+
     //to get the value from ejs template tag
     const productName = req.body.product_name;
     const productPrice = req.body.product_price;
@@ -293,18 +294,20 @@ router.post('/addtoCart', urlencodedParser, (req, res) => {
 
     let sql = `INSERT INTO carts SET ?`;
     let cartDetail = {'product_name':productName, 'product_price':productPrice, 'quantity': productQty, 'user_id':req.session.user_id, };
-    
+ 
 
     connection.query(sql, cartDetail, (err, result)=>{
         if(err) throw err;
         res.redirect('/dashboard');
     });
 
-
-
-   
     
 });
+
+
+
+
+
 
 
 router.post('/testing', urlencodedParser, (req, res) => {
@@ -364,7 +367,7 @@ router.post('/checkout', urlencodedParser, (req, res) => {
         }
         results.forEach((result) => {
             const productName = result.product_name;
-            console.log(productName);
+            
 
             const query2 = `UPDATE products SET product_qty = product_qty - 1 WHERE product_name = '${productName}'`;
 
@@ -372,7 +375,7 @@ router.post('/checkout', urlencodedParser, (req, res) => {
                 if (error) {
                     console.error(error);
                     } else {
-                    console.log(result);
+                    
                 }
                 
             });
@@ -402,7 +405,7 @@ router.get('/logout', (req, res)=>{
 
 //sellers functions
 router.get('/seller-dashboard', (req, res) => {
-
+    
     let query = `SELECT product_link, product_name, product_price, product_qty FROM products WHERE user_id = '${req.session.user_id}'; SELECT count(*) as count FROM products WHERE user_id= '${req.session.user_id}'`;
 
     connection.query(query, (error, results) => {
@@ -412,8 +415,6 @@ router.get('/seller-dashboard', (req, res) => {
         } else {
         let productsCount = results[1][0].count;
          
-        console.log(productsCount);
-        console.log(results);
         res.render ('seller-dashboard', {nameofUser: req.session.first_name, nameofArt:req.session.product_name, data: results[0],});
     
         }
