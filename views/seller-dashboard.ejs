@@ -68,65 +68,69 @@
   
   
 
-
-  <h1 id="listingTarget">Your Listings</h1>
-
+  <div id="listingTarget">
+    <h1 >Your Listings</h1>
+  </div>
   
-
-  <div id="displayContainer" class="grid grid-cols-2 md:grid-cols-3 gap-4">
-    <% data.forEach((item) => { %>
+  <div id="asd">
+    <div id="displayContainer" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <% data.forEach((item) => { %>
         
- 
-          
-      <div id="dataDisplay2">
-
-        <div id="imageSetting" class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <img class="h-auto max-w-full rounded-lg" src="<%- item.product_link %>" alt="">
-        </div>
-        <div style="text-align: center;">
-          <p id="artTitle" class="text-sm font-medium text-gray-900"><%- item.product_name %></p>
-          <p id="artTitle" class="text-sm font-medium text-gray-900">Product ID: <%- item.product_id %></p>
-          <p id="detailsetting" class="text-sm font-medium text-gray-900 ">Price: <%- item.product_price %></p>
-          <p id="detailsetting" class="text-sm font-medium text-gray-900">Qty: <%- item.product_qty %></p>
-        </div>
-
-        <div id="detailTextContainer">
-
             
-          <form  action="/remove-listing" method="POST">
-            <input type="hidden" name="product_id" value="<%- item.product_id %>">
-            <button style="z-index: 999;" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove Listing</button>
-          </form>
+        <div id="dataDisplay2">
+
+          <div id="imageSetting" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <img class="h-auto max-w-full rounded-lg" src="<%- item.product_link %>" alt="">
+          </div>
+          <div style="text-align: center;">
+            <p id="artTitle" class="text-sm font-medium text-gray-900"><%- item.product_name %></p>
+            <p id="artTitle" class="text-sm font-medium text-gray-900">Product ID: <%- item.product_id %></p>
+            <p id="detailsetting" class="text-sm font-medium text-gray-900 ">Price: <%- item.product_price %></p>
+            <p id="detailsetting" class="text-sm font-medium text-gray-900">Qty: <%- item.product_qty %></p>
+          </div>
+
+          <div id="detailTextContainer">
+
+              
+            <form  action="/remove-listing" method="POST">
+              <input type="hidden" name="product_id" value="<%- item.product_id %>">
+              <button style="z-index: 999;" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove Listing</button>
+            </form>
+          </div>
+
         </div>
+      <% }); %>
 
-      </div>
-
-
-      
-    <% }); %>
-
+    </div>
+    
   </div>
 
-  <footer id="sellerboardfooter" class="bg-white shadow m-4 dark:bg-gray-800">
-    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Art Piece</a>. All Rights Reserved.
-    </span>
-    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-        <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
-        </li>
-        <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-        </li>
-        <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>
-        </li>
-        <li>
-            <a href="#" class="hover:underline">Contact</a>
-        </li>
-    </ul>
-    </div>
-  </footer>
+
+
+
+
+  <div id="footerContainerseller">
+    <footer id="sellerboardfooter" class="bg-white shadow m-4 dark:bg-gray-800">
+      <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Art Piece</a>. All Rights Reserved.
+      </span>
+      <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+          <li>
+              <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+          </li>
+          <li>
+              <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+          </li>
+          <li>
+              <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>
+          </li>
+          <li>
+              <a href="#" class="hover:underline">Contact</a>
+          </li>
+      </ul>
+      </div>
+    </footer>
+</div>
   
 
 

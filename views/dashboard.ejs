@@ -43,7 +43,8 @@
     </div>
   </nav>
     
-  Hello This is  <%= nameofUser%> dashboard
+  <h1 id="dashboardName"> Welcome, <%= nameofUser%> </h1>
+  
 
   <div id="displayContainer" class="grid grid-cols-2 md:grid-cols-3 gap-4">
     <% newTarget.forEach((item) => { %>
@@ -54,6 +55,8 @@
         <input type="hidden" name="product_price" value="<%- item.product_price %>">
         <input type="hidden" name="product_qty" value="<%- item.product_qty %>">
           
+        <h1>Art Gallery</h1>
+
         <div id="dataDisplay">
 
           <div id="imageSetting" class="grid grid-cols-2 md:grid-cols-3 gap-4">

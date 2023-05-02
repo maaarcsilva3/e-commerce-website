@@ -25,11 +25,15 @@ margin:auto;
 
 
 /* dashboard css */
+#dashboardName{
+  text-align: right;
+  margin-right: 150px;
+}
 
 #dataDisplay{
-  
-  margin-top: 80px !important;
   border: 1px solid;
+  margin-top: 80px !important;
+
   padding: 5px;
 }
 
@@ -67,13 +71,21 @@ margin:auto;
 }
 
 #dashboardfooter{
-  width: 98.9vw;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0;
+  width: 100vw;
   margin-left: 0;
 }
 
 
 
 /* buyer profile */
+#buyerProfilename{
+  text-align: right;
+  margin-right: 150px;
+}
+
 
 #buyerprofileBody{
   background-color: rgb(197, 197, 197);
@@ -99,10 +111,13 @@ margin:auto;
 
 #sellerdashboardBody{
   background-color: rgb(197, 197, 197);
+  height: auto;
+  
 
 }
 
 #listingTarget{
+  
   text-align: center;
   margin-top: 50px;
 }
@@ -111,12 +126,36 @@ margin:auto;
 #dataDisplay2{
   
   margin-top: 40px !important;
-  border: 1px solid;
+ 
   padding: 5px;
 }
 
+
+#asd{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#displayContainer{
+  
+  height: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  
+}
+
+
+#footerContainerseller{
+position: relative;
+margin-top: 373px;
+margin-right: 0px;
+}
+
 #sellerboardfooter{
-width: 98.9vw;
-margin-left: 0;
-margin-bottom: 0;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0;
+  width: 1519px;
+  margin-left: 0;
 }
