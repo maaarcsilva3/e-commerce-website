@@ -39,7 +39,11 @@ connection.connect((error) => {
 });
 
   
+router.get('/home', (req, res) => {
 
+    res.render ('home');  //go to login ejs
+
+});
 
 
 
