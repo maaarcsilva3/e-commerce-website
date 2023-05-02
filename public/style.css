@@ -1,6 +1,4 @@
-#abc {
-  color: red ;
-}
+
 
 #uploadform-container{
   display: auto;
@@ -21,4 +19,104 @@ margin:auto;
   display: flex;
   width: auto;
   
+}
+
+
+
+
+/* dashboard css */
+
+#dataDisplay{
+  
+  margin-top: 80px !important;
+  border: 1px solid;
+  padding: 5px;
+}
+
+#dashboardBody{
+  background-color: rgb(197, 197, 197);
+  margin:0;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+ 
+}
+
+
+#display{
+  background-color: #a8c573 ;
+  position: relative;
+  display: flex;
+  width: auto;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+#imageSetting{
+  display: flex;
+  justify-content: center;
+  height: 450px;
+  width: auto;
+  margin-bottom: 20px;
+}
+
+#detailTextContainer{
+  text-align: center;
+  width: auto;
+}
+
+#dashboardfooter{
+  width: 98.9vw;
+  margin-left: 0;
+}
+
+
+
+/* buyer profile */
+
+#buyerprofileBody{
+  background-color: rgb(197, 197, 197);
+}
+
+#cartList{
+  margin: auto;
+  width:800px !important;
+  text-align: center !important;
+}
+
+.targetHead{
+  text-align: center;
+}
+
+#tittleCart{
+  text-align: center;
+}
+
+
+
+/* seller dashboard */
+
+#sellerdashboardBody{
+  background-color: rgb(197, 197, 197);
+
+}
+
+#listingTarget{
+  text-align: center;
+  margin-top: 50px;
+}
+
+
+#dataDisplay2{
+  
+  margin-top: 40px !important;
+  border: 1px solid;
+  padding: 5px;
+}
+
+#sellerboardfooter{
+width: 98.9vw;
+margin-left: 0;
+margin-bottom: 0;
 }

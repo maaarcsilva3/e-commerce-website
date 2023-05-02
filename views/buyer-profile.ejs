@@ -7,66 +7,70 @@
     <title>Buyer Profile Page</title>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> 
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- own css style -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <link type="text/css" rel="stylesheet" href="/static/style.css">
 
     <!-- sweet allert2 -->
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
 </head>
-<body>
+
+
+
+<body id="buyerprofileBody">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="https://flowbite.com/" class="flex items-center">
-              <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" />
-              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+          <a href="#" class="flex items-center">
+              <img src="static/assets/logo.png" class="h-8 mr-3" alt="Flowbite Logo" />
+              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Art Piece</span>
           </a>
           <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
           </button>
-            <div style=" position: relative; left: 500px;">
-                 <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src=" " alt="Bordered avatar">
-            </div>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-
-                    <li>
-                        <a href="/dashboard" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Browse</a>
-                    </li>
-                    <li>
-                        <a href="/logout" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
-                    </li>
-              </ul>
+          <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                <a href="#" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+              </li>
+              <li>
+                <a href="/dashboard" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Dashboard</a>
+              </li>
+              <li>
+                <a href="/logout" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Logout</a>
+              </li>
+              
+            </ul>
           </div>
         </div>
-    </nav>
+      </nav>
 
     
     <h1 id="abc"> Hello This is <%= nameofUser%> dashboard </h1>
 
    
 
-    <!-- <button id="getcartdata" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get cart data</button> -->
+<h1 id="tittleCart">Sopping Cart</h1>    
 
-    
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+
+<div id="cartList" class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table  class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 targetHead">
+                   Cart ID
+                </th>
+                <th scope="col" class="px-6 py-3 targetHead">
                     Product ID
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 targetHead">
                     Product Name
                 </th>
 
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 targetHead">
                     Product Price
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 targetHead">
                     Action
                 </th>
             </tr>
@@ -74,51 +78,66 @@
         <tbody>
             <% details.forEach((item) => { %>
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            
-                </th>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 targetHead">
+                    <%- item.cart_id %>
+                </td>
+                <td class="px-6 py-4 targetHead">
+                    <%- item.product_id %>
+                </td>
+                <td class="px-6 py-4 targetHead">
                     <%- item.product_name %>
                 </td>
 
 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 targetHead">
                     <%- item.product_price %>
                 </td>
-                <td class="px-6 py-4">
-                    <a href="/editcart" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                <td class="px-6 py-4 targetHead">
+                    <form  action="/editcart" method="POST">
+                        <input type="hidden" name="product_id" value="<%- item.product_id %>">
+                        <input type="hidden" name="cart_id" value=" <%- item.cart_id %>">
+                        <button style="z-index: 999;" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove from Cart </button>
+                    </form>
                 </td>
             </tr>
             <% }); %>
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    
-                </th>
-                <td class="px-6 py-4">
+
+                <td class="px-6 py-4 targetHead">
                     
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 targetHead">
+                    
+                </td>
+                <td class="px-6 py-4 targetHead">
+                    
+                </td>
+                <td class="px-6 py-4 targetHead">
                    
                 </td>
 
 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 targetHead">
                     
                 </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <td class="px-6 py-4 targetHead">
                     
-                </th>
+                </td>
+                <td class="px-6 py-4 targetHead">
+                    
+                </td>
 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 targetHead">
                     Grand Total:
                 </td>
 
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 targetHead">
                     <%-  grandtotal %>
                 </td>
-                <td class="px-6 py-4">
+                
+                <td class="px-1 py-4 targetHead">
                     <form  action="/checkout" method="POST">
                         <button  type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg aria-hidden="true" class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>
@@ -132,6 +151,27 @@
         </tbody>
     </table>
 </div>
+
+<footer id="dashboardfooter" class="bg-white shadow m-4 dark:bg-gray-800">
+    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Art Piece</a>. All Rights Reserved.
+    </span>
+    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+        <li>
+            <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+        </li>
+        <li>
+            <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+        </li>
+        <li>
+            <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>
+        </li>
+        <li>
+            <a href="#" class="hover:underline">Contact</a>
+        </li>
+    </ul>
+    </div>
+  </footer>
 
 </body>
 </html>
