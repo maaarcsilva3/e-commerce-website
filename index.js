@@ -42,7 +42,7 @@ app.get('/getSession', (req, res) => {
 const routes=   require ('./routes/auth'); //to use routes
 
 app.use ('/', routes); // use the router for all routes starting with '/'
-app.use
+
 
 
 
