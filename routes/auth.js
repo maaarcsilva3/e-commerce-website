@@ -139,8 +139,6 @@ router.post('/signup', urlencodedParser, (req, res) => {
 router.get('/dashboard', (req, res) => {
     let query = 'SELECT product_id, product_link, product_name, product_price,product_qty FROM products';
     
-
-
     connection.query(query, (error, results) => {
         if (error) {
           console.error(error);
@@ -150,7 +148,7 @@ router.get('/dashboard', (req, res) => {
             console.log(results);
             // res.render ('dashboard', {nameofUser: req.session.first_name, newTarget: results});
 
-            let cartcounterQuery = 'SELECT count(*) as count FROM carts';
+            let cartcounterQuery = `SELECT count(*) as count FROM carts WHERE user_id = '${req.session.user_id}'`;
             connection.query (cartcounterQuery, (error,counterresult) => {
                 if (error) {
                     console.error(error);
@@ -172,11 +170,19 @@ router.get('/dashboard', (req, res) => {
 });
 
 
-router.get('/testing', (req, res) =>{
+
+
+
+router.get('/browse', (req, res) =>{
+    if (req.session.user_id = req.session.user_id ){
+        res.redirect ('dashboard');
+        
+        
+    }else{
+        res.redirect ('login');
+        
+    }
    
-
-    
-
 
 });
 
@@ -302,6 +308,10 @@ router.post('/authenticate', urlencodedParser, (req, res) => {
         req.session.last_name =last_name;
         req.session.user_id =user_id;
 
+///////////////////////////////////////////
+        req.session.sessionID=req.sessionID;
+//////////////////////////////////////////
+
         console.log(req.session.user_type,req.session.first_name,req.session.last_name, req.session.user_id);
        
         const hashedPassword = results[0].password;
@@ -417,8 +427,16 @@ router.post('/checkout', urlencodedParser, (req, res) => {
 
 
 router.get('/logout', (req, res)=>{
-  
-    res.redirect('login');
+
+    req.session.destroy(function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+            res.redirect('login');
+        }
+    });
+      
+   
 });
 
 
