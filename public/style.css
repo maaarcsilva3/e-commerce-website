@@ -31,6 +31,12 @@ margin:auto;
   font-size: x-large;
 }
 
+#cartItems{
+  text-align: right;
+  margin-right: 190px;
+  font-size: large;
+}
+
 #dataDisplay{
   background-color: #FFFBEB;
   border: 1px solid;

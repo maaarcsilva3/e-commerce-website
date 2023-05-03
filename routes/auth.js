@@ -138,6 +138,8 @@ router.post('/signup', urlencodedParser, (req, res) => {
 
 router.get('/dashboard', (req, res) => {
     let query = 'SELECT product_id, product_link, product_name, product_price,product_qty FROM products';
+    
+
 
     connection.query(query, (error, results) => {
         if (error) {
@@ -145,18 +147,38 @@ router.get('/dashboard', (req, res) => {
           
         } else {
            
-
-
             console.log(results);
-            res.render ('dashboard', {nameofUser: req.session.first_name, newTarget: results});
+            // res.render ('dashboard', {nameofUser: req.session.first_name, newTarget: results});
+
+            let cartcounterQuery = 'SELECT count(*) as count FROM carts';
+            connection.query (cartcounterQuery, (error,counterresult) => {
+                if (error) {
+                    console.error(error);
+                    
+                  } else {
+                    let counterResult = counterresult[0].count;
+
+                  
+                    console.log(counterResult);
+                    res.render ('dashboard', {nameofUser: req.session.first_name, newTarget: results, cartcounter: counterResult});
+                }
+        
+            });
         }
         
-      });
+    });
    
 
 });
 
 
+router.get('/testing', (req, res) =>{
+   
+
+    
+
+
+});
 
 
 
@@ -423,6 +445,7 @@ router.get('/seller-dashboard', (req, res) => {
 
     
 });
+
 
 
 
