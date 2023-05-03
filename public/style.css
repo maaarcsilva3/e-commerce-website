@@ -127,11 +127,12 @@ margin:auto;
   background-color: rgb(197, 197, 197);
   height: auto;
   
+  
 
 }
 
 #listingTarget{
-  
+  font-size: xx-large;
   text-align: center;
   margin-top: 50px;
 }
