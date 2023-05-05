@@ -524,6 +524,12 @@ router.post('/remove-listing', urlencodedParser, (req, res) => {
 
 
 
+router.get ('/testing', (req, res) => {
+
+    res.render('testing');
+
+});
+
 
 
 

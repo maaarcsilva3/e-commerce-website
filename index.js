@@ -47,6 +47,10 @@ app.use ('/', routes); // use the router for all routes starting with '/'
 
 
 
+
+
+
+
 //templating engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname , 'views'));
@@ -54,6 +58,7 @@ app.set('views', path.join(__dirname , 'views'));
 //public folder
 app.use('/static', express.static (path.join(__dirname , 'public')));
 app.set('/assets', express.static (path.join(__dirname , 'public/assets')));
+
 
 
 
